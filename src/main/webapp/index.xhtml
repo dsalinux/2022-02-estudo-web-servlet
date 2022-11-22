@@ -2,15 +2,35 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
 	Hello from Facelets
 	<p:panel header="Hello">
-	    <embed style="width: 100%" src="http://localhost:8080/web-servlet/documento?nome=pdf2.pdf" type="application/pdf"></embed>
+            <p:dataTable value="#{arquivosBean.arquivos}" var="nome">
+                <p:column>
+                    <h:outputText value="#{nome}"></h:outputText>
+                </p:column>
+                <p:column>
+                    <a href="documento?nome=#{nome}">Documento</a>
+                </p:column>
+            </p:dataTable>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr">
+                <ui:repeat value="#{arquivosBean.arquivos}" var="nome">
+                    <div>
+                        #{nome}
+                    </div>
+                </ui:repeat>
+            </div>
+	    <!--<embed style="width: 100%" src="http://localhost:8080/web-servlet/documento?nome=aula.pdf" type="application/pdf"></embed>-->
 	</p:panel>
+<!--        <form action="documento" method="get">
+            <input type="text" name="nome"></input>
+            <input type="submit" value="Enviar"></input>
+        </form>-->
     </h:body>
 </html>
 
